@@ -41,7 +41,7 @@ const App = () => {
       <div className="Notes">
         {notes.map((i, k) => (
           <div id="noteItem" key={k}>
-            <h2>#{k + 1}</h2>
+            <h2>#{i.note_id}</h2>
 
             <p>{i.description}</p>
 

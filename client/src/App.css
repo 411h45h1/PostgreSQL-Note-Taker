@@ -16,9 +16,12 @@
 }
 
 #noteItem {
-  width: 40vw;
+  width: 50vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
+  background-color: beige;
+  margin: 10px;
+  border-radius: 15px;
 }
