@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Input from "./components/Input";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [description, setDescription] = useState("");
 
   useEffect(() => {
     onNotes();
@@ -30,38 +30,13 @@ const App = () => {
     }
   };
 
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    try {
-      const body = { description };
-      await fetch("http://localhost:5000/notes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      window.location = "/";
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-  console.log(notes);
-
   return (
     <div className="App">
       <header>
         <h1>Postgres Note Taker</h1>
       </header>
 
-      <form onSubmit={onSubmitForm}>
-        <input
-          type="text"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        <button>Add</button>
-      </form>
+      <Input />
 
       <div className="Notes">
         {notes.map((i, k) => (
