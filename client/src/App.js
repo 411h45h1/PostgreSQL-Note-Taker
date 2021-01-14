@@ -20,6 +20,16 @@ const App = () => {
     }
   };
 
+  const deleteTodo = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/notes/${id}`, {
+        method: "DELETE",
+      }).then(() => setNotes(notes.filter((note) => note.note_id !== id)));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
@@ -29,10 +39,13 @@ const App = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
+
+      window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
   };
+
   console.log(notes);
 
   return (
@@ -56,6 +69,8 @@ const App = () => {
             <h2>#{k + 1}</h2>
 
             <p>{i.description}</p>
+
+            <button onClick={() => deleteTodo(i.note_id)}>Delete</button>
           </div>
         ))}
       </div>
