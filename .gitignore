@@ -1,4 +1,4 @@
 server/pool.js
 server/node_modules
-client/node_modules
-client/.eslintcache
+server/client/node_modules
+server/client/.eslintcache
