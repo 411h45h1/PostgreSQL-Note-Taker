@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button, Form, TextArea } from "semantic-ui-react";
 
 const Input = () => {
   const [description, setDescription] = useState("");
@@ -19,14 +20,16 @@ const Input = () => {
   };
 
   return (
-    <form onSubmit={onSubmitForm}>
-      <input
-        type="text"
+    <Form onSubmit={onSubmitForm} style={{ width: "35%" }}>
+      <Form.Field
+        label="Note:"
+        control={TextArea}
+        placeholder="Write your note here"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <button>Add</button>
-    </form>
+      <Button type="submit">add</Button>
+    </Form>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Input from "./components/Input";
+import { Icon, Label, Segment } from "semantic-ui-react";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -33,21 +34,53 @@ const App = () => {
   return (
     <div className="App">
       <header>
-        <h1>Postgres Note Taker</h1>
+        <h1 style={{ fontSize: "40px" }}>PostgreSQL Note Taker</h1>
       </header>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "95vw",
+        }}
+      >
+        <Input />
+        <Segment
+          style={{
+            backgroundColor: "brown",
+            borderRadius: 15,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            justifyContent: "center",
+            height: "75vh",
+            width: "60%",
+            flexWrap: "wrap",
+            overflowY: "auto",
+          }}
+        >
+          {notes.map((i, k) => (
+            <Segment id="noteItem" key={k}>
+              <Label
+                as="a"
+                attached="top left"
+                content={`#${i.note_id}`}
+                onClick={() => deleteTodo(i.note_id)}
+                color="black"
+              />
 
-      <Input />
+              <p>{i.description}</p>
 
-      <div className="Notes">
-        {notes.map((i, k) => (
-          <div id="noteItem" key={k}>
-            <h2>#{i.note_id}</h2>
-
-            <p>{i.description}</p>
-
-            <button onClick={() => deleteTodo(i.note_id)}>Delete</button>
-          </div>
-        ))}
+              <Label
+                as="a"
+                attached="top right"
+                content="Delete"
+                onClick={() => deleteTodo(i.note_id)}
+                color="red"
+              />
+            </Segment>
+          ))}
+        </Segment>
       </div>
     </div>
   );
