@@ -3,6 +3,7 @@ import "./App.css";
 import Input from "./components/Input";
 import { Label, Segment } from "semantic-ui-react";
 import { Media, MediaContextProvider } from "./config/media";
+import EditNote from "./components/EditNote";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
@@ -26,7 +27,10 @@ const App = () => {
     try {
       await fetch(`http://localhost:5000/notes/${id}`, {
         method: "DELETE",
-      }).then(() => setNotes(notes.filter((note) => note.note_id !== id)));
+      }).then(() => {
+        setNotes(notes.filter((note) => note.nid !== id));
+        window.location = "/";
+      });
     } catch (err) {
       console.error(err.message);
     }
@@ -80,19 +84,21 @@ const App = () => {
                 >
                   <Label
                     as="a"
-                    attached="top left"
-                    content={`#${i.note_id}`}
-                    onClick={() => deleteTodo(i.note_id)}
+                    attached="bottom right"
+                    content={`#${i.nid}`}
+                    onClick={() => deleteTodo(i.nid)}
                     color="black"
                   />
 
-                  <p>{i.description}</p>
+                  <p style={{ margin: 18 }}>{i.description}</p>
+
+                  <EditNote data={i} />
 
                   <Label
                     as="a"
-                    attached="top right"
+                    attached="top left"
                     content="Delete"
-                    onClick={() => deleteTodo(i.note_id)}
+                    onClick={() => deleteTodo(i.nid)}
                     color="red"
                   />
                 </Segment>
@@ -136,6 +142,7 @@ const App = () => {
                     flexDirection: "row",
                     maxWidth: "24vw",
                     minWidth: "15vw",
+                    minHeight: "100px",
                     alignItems: "center",
                     justifyContent: "space-evenly",
                     backgroundColor: "beige",
@@ -147,19 +154,21 @@ const App = () => {
                 >
                   <Label
                     as="a"
-                    attached="top left"
-                    content={`#${i.note_id}`}
-                    onClick={() => deleteTodo(i.note_id)}
+                    attached="bottom right"
+                    content={`#${i.nid}`}
+                    onClick={() => deleteTodo(i.nid)}
                     color="black"
                   />
 
-                  <p>{i.description}</p>
+                  <p style={{ margin: 18 }}>{i.description}</p>
+
+                  <EditNote data={i} />
 
                   <Label
                     as="a"
-                    attached="top right"
+                    attached="top left"
                     content="Delete"
-                    onClick={() => deleteTodo(i.note_id)}
+                    onClick={() => deleteTodo(i.nid)}
                     color="red"
                   />
                 </Segment>

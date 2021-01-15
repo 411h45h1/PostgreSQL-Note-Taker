@@ -1,6 +1,6 @@
 CREATE DATABASE notedb;
 
 CREATE TABLE note(
-  note_id SERIAL PRIMARY KEY,
+  nid SERIAL PRIMARY KEY,
   description VARCHAR(255)
 );
