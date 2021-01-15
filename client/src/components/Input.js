@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, TextArea } from "semantic-ui-react";
+import { Media } from "../config/media";
 
 const Input = () => {
   const [description, setDescription] = useState("");
@@ -20,16 +21,34 @@ const Input = () => {
   };
 
   return (
-    <Form onSubmit={onSubmitForm} style={{ width: "35%" }}>
-      <Form.Field
-        label="Note:"
-        control={TextArea}
-        placeholder="Write your note here"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <Button type="submit">add</Button>
-    </Form>
+    <>
+      <Media at="mobile">
+        <Form onSubmit={onSubmitForm} style={{ width: "100%" }}>
+          <Form.Field
+            maxLength="255"
+            label="Note:"
+            control={TextArea}
+            placeholder="Write your note here"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <Button type="submit">add</Button>
+        </Form>
+      </Media>
+      <Media greaterThanOrEqual="tablet">
+        <Form onSubmit={onSubmitForm} style={{ width: "35vw" }}>
+          <Form.Field
+            maxLength="255"
+            label="Note:"
+            control={TextArea}
+            placeholder="Write your note here"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <Button type="submit">add</Button>
+        </Form>
+      </Media>
+    </>
   );
 };
 
